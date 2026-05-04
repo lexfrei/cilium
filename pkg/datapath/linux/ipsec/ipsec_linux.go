@@ -1195,6 +1195,9 @@ func (a *agent) LoadIPSecKeys(r io.Reader) (uint8, error) {
 		a.key = ipSecKey
 		a.ipSecCurrentKeySPI = spi
 	}
+	if err := scanner.Err(); err != nil {
+		return 0, fmt.Errorf("error scanning IPsec keys: %w", err)
+	}
 	return spi, nil
 }
 
